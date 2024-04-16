@@ -1,7 +1,17 @@
 name: Automated tests
 
 on:
-  push
+  workflows_dispatch:
+    inputs:
+      deployments_target:
+        description: Choose target
+        required: true
+        default:
+        type: choice
+        options:
+          - first_test
+
+
 
 jobs:
   test:
@@ -16,6 +26,9 @@ jobs:
           python-version: "3.11"
       - name: install dependencies
         run: pip install -r requirements.txt
-      - name: Run tests
+      - name: first_tests
+        if: "github.event.inputs.deployment_target == 'first_test'"
         run: pytest
+
+
 
