@@ -29,7 +29,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: first_tests
         if: "github.event.inputs.deployment_target == 'first_test'"
-        run: pytest -v
+        run: pytest
       - name: second_tests
         if: "github.event.inputs.deployment_target == 'second_tests'"
         run: pytest
