@@ -13,3 +13,5 @@ def quadratic_equation(a, b, c, e):
         return [x1]
     else:
         return [x1, x2]
+
+
