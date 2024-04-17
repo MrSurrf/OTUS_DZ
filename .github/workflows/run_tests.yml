@@ -10,7 +10,7 @@ on:
         type: choice
         options:
           - first_test
-          - second_tests
+          - second_test
 
 
 
@@ -31,7 +31,7 @@ jobs:
         if: "github.event.inputs.deployment_target == 'first_test'"
         run: pytest
       - name: second_tests
-        if: "github.event.inputs.deployment_target == 'second_tests'"
+        if: "github.event.inputs.deployment_target == 'second_test'"
         run: pytest
 
 
