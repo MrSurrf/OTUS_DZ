@@ -1,7 +1,7 @@
 name: Automated tests
 
 on:
-  workflows_dispatch:
+  workflow_dispatch:
     inputs:
       deployments_target:
         description: Choose target
