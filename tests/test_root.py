@@ -17,12 +17,8 @@ def test_multi_one():
 
 
 def test_equal_zero():
-    try:
-        quadratic_equation(0, 3, 3, 0.0001)
-        assert False
-    except:
-        assert True
 
+    assert quadratic_equation(0.001,1,1,0.0001) == -1
 
 def test_type():
     try:
