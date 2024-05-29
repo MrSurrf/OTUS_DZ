@@ -8,15 +8,15 @@ class IPositionable(ABC):
 
 class IMovable(ABC):
     @abstractmethod
-    def GetLocation(self):
+    def getLocation(self):
         pass
 
     @abstractmethod
-    def SetLocation(self, vector):
+    def setLocation(self, vector):
         pass
 
     @abstractmethod
-    def GetVelosity(self):
+    def getVelosity(self):
         pass
 
 class IRotatable(ABC):
@@ -88,6 +88,12 @@ class MovableObject(PositionableObject, IMovable):
         super().__init__(x, y)
         self._velocity_x = velocity_x
         self._velocity_y = velocity_y
+
+    def get_position(self):
+        pass
+
+    def set_position(self, x, y):
+        pass
 
     def get_velocity(self):
         return self._velocity_x, self._velocity_y
