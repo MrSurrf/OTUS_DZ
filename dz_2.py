@@ -104,7 +104,7 @@ class MovableObject(PositionableObject, IMovable):
 
     def move(self):
         x, y = self.get_position()
-        vx, vy = self.get_velocity()
+        vx, vy = self.get_velosity()
         self.set_position(x + vx, y + vy)
 
 
