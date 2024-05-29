@@ -6,17 +6,21 @@ class IPositionable(ABC):
     def get_position(self):
         pass
 
+    @abstractmethod
+    def set_position(self, x,y):
+        pass
+
 class IMovable(ABC):
     @abstractmethod
-    def getLocation(self):
+    def get_position(self):
         pass
 
     @abstractmethod
-    def setLocation(self, vector):
+    def set_position(self, x,y):
         pass
 
     @abstractmethod
-    def getVelosity(self):
+    def get_velosity(self):
         pass
 
 class IRotatable(ABC):
@@ -95,7 +99,7 @@ class MovableObject(PositionableObject, IMovable):
     def set_position(self, x, y):
         pass
 
-    def get_velocity(self):
+    def get_velosity(self):
         return self._velocity_x, self._velocity_y
 
     def move(self):
