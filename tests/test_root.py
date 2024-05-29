@@ -36,7 +36,7 @@ class TestMovableObject(unittest.TestCase):
     def test_move(self):
         obj = MovableObject(12, 5, -7, 3)
         obj.move()
-        self.assertEqual(obj.getLocation(), (5, 8))
+        self.assertEqual(obj.get_position(), (5, 8))
 
     def test_move_invalid_position(self):
         with self.assertRaises(TypeError):

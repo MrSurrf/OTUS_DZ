@@ -11,13 +11,13 @@ class IPositionable(ABC):
         pass
 
 class IMovable(ABC):
-    @abstractmethod
-    def get_position(self):
-        pass
-
-    @abstractmethod
-    def set_position(self, x,y):
-        pass
+    # @abstractmethod
+    # def get_position(self):
+    #     pass
+    #
+    # @abstractmethod
+    # def set_position(self, x,y):
+    #     pass
 
     @abstractmethod
     def get_velosity(self):
@@ -93,11 +93,11 @@ class MovableObject(PositionableObject, IMovable):
         self._velocity_x = velocity_x
         self._velocity_y = velocity_y
 
-    def get_position(self):
-        pass
-
-    def set_position(self, x, y):
-        pass
+    # def get_position(self):
+    #     pass
+    #
+    # def set_position(self, x, y):
+    #     pass
 
     def get_velosity(self):
         return self._velocity_x, self._velocity_y
