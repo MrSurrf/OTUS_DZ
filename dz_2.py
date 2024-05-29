@@ -113,32 +113,7 @@ class RotatableObject(PositionableObject, IRotatable):
         return self._angle
 
 
-# class Move:
-#     def move(self, movable: IMovable):
-#         loc = movable.GetLocation()
-#         vel = movable.GetVelosity()
-#         loc[0] += vel[0]
-#         loc[1] += vel[1]
-#         movable.SetLocation(loc)
-#         # Сложить текущую локацию и скорость
-#
-#
-# class Rotate:
-#     def rotate(self, movable: IMovable):
-#         pass
-#
-#
-# def run():
-#     s = SpaceShip()
-#     s1 = SpaceShip1()
-#     m = Move()
-#
-#     m.move(s1)
-#     s1.GetLocation()
-#     m.move(s1)
-#     s1.GetLocation()
-#     m.move(s1)
-#     s1.GetLocation()
 
 
-# run()
+
+
