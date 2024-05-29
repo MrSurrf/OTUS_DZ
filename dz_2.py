@@ -99,12 +99,12 @@ class MovableObject(PositionableObject, IMovable):
     # def set_position(self, x, y):
     #     pass
 
-    def get_velosity(self):
+    def get_velocity(self):
         return self._velocity_x, self._velocity_y
 
     def move(self):
         x, y = self.get_position()
-        vx, vy = self.get_velosity()
+        vx, vy = self.get_velocity()
         self.set_position(x + vx, y + vy)
 
 
