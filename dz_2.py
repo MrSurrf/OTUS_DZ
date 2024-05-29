@@ -20,7 +20,7 @@ class IMovable(ABC):
     #     pass
 
     @abstractmethod
-    def get_velosity(self):
+    def get_velocity(self):
         pass
 
 class IRotatable(ABC):
