@@ -6,21 +6,17 @@ class IPositionable(ABC):
     def get_position(self):
         pass
 
+class IMovable(ABC):
     @abstractmethod
-    def set_position(self, x,y):
+    def GetLocation(self):
         pass
 
-class IMovable(ABC):
-    # @abstractmethod
-    # def get_position(self):
-    #     pass
-    #
-    # @abstractmethod
-    # def set_position(self, x,y):
-    #     pass
+    @abstractmethod
+    def SetLocation(self, vector):
+        pass
 
     @abstractmethod
-    def get_velocity(self):
+    def GetVelosity(self):
         pass
 
 class IRotatable(ABC):
@@ -93,12 +89,6 @@ class MovableObject(PositionableObject, IMovable):
         self._velocity_x = velocity_x
         self._velocity_y = velocity_y
 
-    # def get_position(self):
-    #     pass
-    #
-    # def set_position(self, x, y):
-    #     pass
-
     def get_velocity(self):
         return self._velocity_x, self._velocity_y
 
@@ -123,4 +113,22 @@ class RotatableObject(PositionableObject, IRotatable):
         return self._angle
 
 
+class MoveCommand:
+    def __init__(self, movable):
+        self._movable = movable
 
+    def execute(self):
+        self._movable.move()
+
+class RotateCommand:
+    def __init__(self, rotatable, direction):
+        self._rotatable = rotatable
+        self._direction = direction
+
+    def execute(self):
+        if self._direction == 'left':
+            self._rotatable.rotate_left()
+        elif self._direction == 'right':
+            self._rotatable.rotate_right()
+        else:
+            raise ValueError("Invalid direction. Use 'left' or 'right'")
