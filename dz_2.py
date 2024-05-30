@@ -113,7 +113,22 @@ class RotatableObject(PositionableObject, IRotatable):
         return self._angle
 
 
+class MoveCommand:
+    def __init__(self, movable):
+        self._movable = movable
 
+    def execute(self):
+        self._movable.move()
 
+class RotateCommand:
+    def __init__(self, rotatable, direction):
+        self._rotatable = rotatable
+        self._direction = direction
 
-
+    def execute(self):
+        if self._direction == 'left':
+            self._rotatable.rotate_left()
+        elif self._direction == 'right':
+            self._rotatable.rotate_right()
+        else:
+            raise ValueError("Invalid direction. Use 'left' or 'right'")
