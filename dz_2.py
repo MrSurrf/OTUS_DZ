@@ -130,11 +130,9 @@ class MoveCommand:
             raise TypeError("Error")
         self._movable.move()
 
-        new_position = position + velocity
-        try:
-            self._movable.set_position(new_position)
-        except AttributeError:
-            raise AttributeError("Erorr")
+        new_position = (position[0] + velocity[0], position[1] + velocity[1])
+        self._movable.set_position(new_position)
+
 
 class RotateCommand:
     def __init__(self, rotatable, direction):

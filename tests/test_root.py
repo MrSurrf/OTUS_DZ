@@ -35,7 +35,7 @@ def test_type():
 class TestMovableObject(unittest.TestCase):
     def test_move(self):
 
-        mock_m = create_autospec(IMovable)
+        mock_m = create_autospec(IMovable, instance=True)
 
         mock_m.get_position.return_value = (12, 5)
         mock_m.get_velocity.return_value = (-7, 3)
@@ -43,7 +43,7 @@ class TestMovableObject(unittest.TestCase):
         move_command = MoveCommand(mock_m)
 
         move_command.execute()
-        mock_m.set_position.assert_called_with(5, 8)
+        mock_m.set_position.assert_called_with((5, 8))
 
         # obj = MovableObject(12, 5, -7, 3)
         # obj.move()
@@ -51,7 +51,7 @@ class TestMovableObject(unittest.TestCase):
 
     def test_move_invalid_position(self):
 
-        mock_m = create_autospec(IMovable)
+        mock_m = create_autospec(IMovable, instance=True)
 
         mock_m.get_position.return_value = None
 
@@ -66,7 +66,7 @@ class TestMovableObject(unittest.TestCase):
 
     def test_move_invalid_velocity(self):
 
-        mock_m = create_autospec(IMovable)
+        mock_m = create_autospec(IMovable, instance=True)
 
         mock_m.get_velocity.return_value = None
 
@@ -82,7 +82,7 @@ class TestMovableObject(unittest.TestCase):
 
     def test_move_invalid_to_set_position(self):
 
-        mock_m = create_autospec(IMovable)
+        mock_m = create_autospec(IMovable, instance=True)
 
         mock_m.set_position.side_effect = AttributeError
 
