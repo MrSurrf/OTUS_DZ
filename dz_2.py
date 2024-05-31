@@ -1,22 +1,26 @@
 from abc import ABC, abstractmethod
 
 
-class IPositionable(ABC):
+# class IPositionable(ABC):
+#     @abstractmethod
+#     def get_position(self):
+#         pass
+
+class IMovable(ABC):
+
     @abstractmethod
     def get_position(self):
         pass
-
-class IMovable(ABC):
     @abstractmethod
-    def GetLocation(self):
+    def get_velocity(self):
         pass
 
     @abstractmethod
-    def SetLocation(self, vector):
+    def set_position(self):
         pass
 
     @abstractmethod
-    def GetVelosity(self):
+    def move(self):
         pass
 
 class IRotatable(ABC):
@@ -70,20 +74,20 @@ class Vector:
     pass
 
 
-class PositionableObject(IPositionable):
-    def __init__(self, x, y):
-        self._x = x
-        self._y = y
+# class PositionableObject(IPositionable):
+#     def __init__(self, x, y):
+#         self._x = x
+#         self._y = y
+#
+#     def get_position(self):
+#         return self._x, self._y
+#
+#     def set_position(self, x, y):
+#         self._x = x
+#         self._y = y
 
-    def get_position(self):
-        return self._x, self._y
 
-    def set_position(self, x, y):
-        self._x = x
-        self._y = y
-
-
-class MovableObject(PositionableObject, IMovable):
+class MovableObject(IMovable):
     def __init__(self, x, y, velocity_x, velocity_y):
         super().__init__(x, y)
         self._velocity_x = velocity_x
@@ -98,7 +102,7 @@ class MovableObject(PositionableObject, IMovable):
         self.set_position(x + vx, y + vy)
 
 
-class RotatableObject(PositionableObject, IRotatable):
+class RotatableObject(IRotatable):
     def __init__(self, x, y, angle=0):
         super().__init__(x, y)
         self._angle = angle
@@ -118,7 +122,19 @@ class MoveCommand:
         self._movable = movable
 
     def execute(self):
+        position = self._movable.get_position()
+        velocity = self._movable.get_velocity()
+        if position is None:
+            raise TypeError("Error")
+        if velocity is None:
+            raise TypeError("Error")
         self._movable.move()
+
+        new_position = position + velocity
+        try:
+            self._movable.set_position(new_position)
+        except AttributeError:
+            raise AttributeError("Erorr")
 
 class RotateCommand:
     def __init__(self, rotatable, direction):
