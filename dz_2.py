@@ -16,7 +16,7 @@ class IMovable(ABC):
         pass
 
     @abstractmethod
-    def set_position(self):
+    def set_position(self,position):
         pass
 
     @abstractmethod
@@ -87,34 +87,34 @@ class Vector:
 #         self._y = y
 
 
-class MovableObject(IMovable):
-    def __init__(self, x, y, velocity_x, velocity_y):
-        super().__init__(x, y)
-        self._velocity_x = velocity_x
-        self._velocity_y = velocity_y
+# class MovableObject(IMovable):
+#     def __init__(self, x, y, velocity_x, velocity_y):
+#         super().__init__(x, y)
+#         self._velocity_x = velocity_x
+#         self._velocity_y = velocity_y
+#
+#     def get_velocity(self):
+#         return self._velocity_x, self._velocity_y
+#
+#     def move(self):
+#         x, y = self.get_position()
+#         vx, vy = self.get_velocity()
+#         self.set_position(x + vx, y + vy)
 
-    def get_velocity(self):
-        return self._velocity_x, self._velocity_y
 
-    def move(self):
-        x, y = self.get_position()
-        vx, vy = self.get_velocity()
-        self.set_position(x + vx, y + vy)
-
-
-class RotatableObject(IRotatable):
-    def __init__(self, x, y, angle=0):
-        super().__init__(x, y)
-        self._angle = angle
-
-    def rotate_left(self):
-        self._angle = (self._angle - 90) % 360
-
-    def rotate_right(self):
-        self._angle = (self._angle + 90) % 360
-
-    def get_angle(self):
-        return self._angle
+# class RotatableObject(IRotatable):
+#     def __init__(self, x, y, angle=0):
+#         super().__init__(x, y)
+#         self._angle = angle
+#
+#     def rotate_left(self):
+#         self._angle = (self._angle - 90) % 360
+#
+#     def rotate_right(self):
+#         self._angle = (self._angle + 90) % 360
+#
+#     def get_angle(self):
+#         return self._angle
 
 
 class MoveCommand:
@@ -128,9 +128,10 @@ class MoveCommand:
             raise TypeError("Error")
         if velocity is None:
             raise TypeError("Error")
-        self._movable.move()
+
 
         new_position = (position[0] + velocity[0], position[1] + velocity[1])
+
         self._movable.set_position(new_position)
 
 
