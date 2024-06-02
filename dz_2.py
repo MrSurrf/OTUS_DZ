@@ -1,22 +1,26 @@
 from abc import ABC, abstractmethod
 
 
-class IPositionable(ABC):
+# class IPositionable(ABC):
+#     @abstractmethod
+#     def get_position(self):
+#         pass
+
+class IMovable(ABC):
+
     @abstractmethod
     def get_position(self):
         pass
-
-class IMovable(ABC):
     @abstractmethod
-    def GetLocation(self):
+    def get_velocity(self):
         pass
 
     @abstractmethod
-    def SetLocation(self, vector):
+    def set_position(self,position):
         pass
 
     @abstractmethod
-    def GetVelosity(self):
+    def move(self):
         pass
 
 class IRotatable(ABC):
@@ -70,47 +74,47 @@ class Vector:
     pass
 
 
-class PositionableObject(IPositionable):
-    def __init__(self, x, y):
-        self._x = x
-        self._y = y
-
-    def get_position(self):
-        return self._x, self._y
-
-    def set_position(self, x, y):
-        self._x = x
-        self._y = y
-
-
-class MovableObject(PositionableObject, IMovable):
-    def __init__(self, x, y, velocity_x, velocity_y):
-        super().__init__(x, y)
-        self._velocity_x = velocity_x
-        self._velocity_y = velocity_y
-
-    def get_velocity(self):
-        return self._velocity_x, self._velocity_y
-
-    def move(self):
-        x, y = self.get_position()
-        vx, vy = self.get_velocity()
-        self.set_position(x + vx, y + vy)
+# class PositionableObject(IPositionable):
+#     def __init__(self, x, y):
+#         self._x = x
+#         self._y = y
+#
+#     def get_position(self):
+#         return self._x, self._y
+#
+#     def set_position(self, x, y):
+#         self._x = x
+#         self._y = y
 
 
-class RotatableObject(PositionableObject, IRotatable):
-    def __init__(self, x, y, angle=0):
-        super().__init__(x, y)
-        self._angle = angle
+# class MovableObject(IMovable):
+#     def __init__(self, x, y, velocity_x, velocity_y):
+#         super().__init__(x, y)
+#         self._velocity_x = velocity_x
+#         self._velocity_y = velocity_y
+#
+#     def get_velocity(self):
+#         return self._velocity_x, self._velocity_y
+#
+#     def move(self):
+#         x, y = self.get_position()
+#         vx, vy = self.get_velocity()
+#         self.set_position(x + vx, y + vy)
 
-    def rotate_left(self):
-        self._angle = (self._angle - 90) % 360
 
-    def rotate_right(self):
-        self._angle = (self._angle + 90) % 360
-
-    def get_angle(self):
-        return self._angle
+# class RotatableObject(IRotatable):
+#     def __init__(self, x, y, angle=0):
+#         super().__init__(x, y)
+#         self._angle = angle
+#
+#     def rotate_left(self):
+#         self._angle = (self._angle - 90) % 360
+#
+#     def rotate_right(self):
+#         self._angle = (self._angle + 90) % 360
+#
+#     def get_angle(self):
+#         return self._angle
 
 
 class MoveCommand:
@@ -118,7 +122,18 @@ class MoveCommand:
         self._movable = movable
 
     def execute(self):
-        self._movable.move()
+        position = self._movable.get_position()
+        velocity = self._movable.get_velocity()
+        if position is None:
+            raise TypeError("Error")
+        if velocity is None:
+            raise TypeError("Error")
+
+
+        new_position = (position[0] + velocity[0], position[1] + velocity[1])
+
+        self._movable.set_position(new_position)
+
 
 class RotateCommand:
     def __init__(self, rotatable, direction):
