@@ -1,5 +1,5 @@
 {
-  "Yandex Browser" : "wikipedia.com",
-  "Edge":"flet.dev",
-  "Firefox": "tproger.ru"
+  "Yandex Browser" : "https://wikipedia.com",
+  "Edge":"https://flet.dev",
+  "Firefox": "https://tproger.ru"
 }
