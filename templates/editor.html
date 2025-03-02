@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактор правил</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Редактор правил перенаправления</h1>
+
+        <div class="editor-section">
+            <h2>Добавить новое правило</h2>
+            <form id="ruleForm">
+                <div class="form-group">
+                    <label for="plugin">Плагин:</label>
+                    <select name="plugin" id="plugin">
+                        {% for name in plugins_name %}
+                            <option value="{{ name }}">{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="param1">Параметр 1:</label>
+                    <input type="text" id="param1" name="param1" required>
+                    <small>Например: windows nt, yabrowser, 12:00-13:00</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="param2">Параметр 2 (ссылка):</label>
+                    <input type="text" id="param2" name="param2" required>
+                    <small>Например: https://example.com</small>
+                </div>
+
+                <button type="button" onclick="submitRule()">Применить</button>
+            </form>
+        </div>
+
+        <div class="rules-section">
+            <h2>Текущие правила</h2>
+            <pre id="rulesContainer"></pre>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/editor.js') }}"></script>
+</body>
+</html>
+

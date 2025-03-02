@@ -1,0 +1,14 @@
+{
+    "browser": {
+        "yabrowser": "https://dzen.ru",
+        "Firefox": "https://vk.ru"
+    },
+    "os": {
+        "windows nt": "https://otus.ru",
+        "mac": "https://docs.google.com"
+    },
+    "time": {
+        "12:00-14:00": "habr.ru",
+        "00:00-02:00": "instagram.com"
+    }
+}
