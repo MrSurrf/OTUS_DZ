@@ -2,7 +2,7 @@ import importlib
 import os
 import logging
 import inspect
-from handlers.plugins_interfaces import PluginInterface
+from plugins.plugins_interfaces import PluginInterface
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +29,7 @@ class PluginManager:
             module_name = filename[:-3]  # Убираем расширение .py
             logger.info(f"Загрузка модуля: {module_name}")
 
-            module = importlib.import_module(f"handlers.{module_name}")
+            module = importlib.import_module(f"plugins.{module_name}")
 
             # Ищем все классы в модуле, которые являются подклассами PluginInterface
             for attr_name in dir(module):
