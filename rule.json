@@ -1,14 +1,22 @@
-{
-    "browser": {
-        "yabrowser": "https://dzen.ru",
-        "Firefox": "https://vk.ru"
+[
+    {
+        "name": "RULE_1",
+        "params": {"os":"Windows","browser": "Firefox", "time": "12:00 - 16:00"},
+        "redirect": "https://dzen.ru"
     },
-    "os": {
-        "windows nt": "https://otus.ru",
-        "mac": "https://docs.google.com"
+    {
+        "name": "RULE_2",
+        "params": {"os":"Windows", "browser": "Yandex Browser", "time": "12:00-16:00"},
+        "redirect": "https://ru.hexlet.io"
     },
-    "time": {
-        "12:00-14:00": "habr.ru",
-        "00:00-02:00": "instagram.com"
+    {
+        "name": "RULE_3",
+        "params": {"os":"mac", "browser": "Edge" },
+        "redirect": "https://dzen.ru"
+    },
+    {
+        "name": "RULE_default",
+        "params": {},
+        "redirect": "https://default.com"
     }
-}
+]
