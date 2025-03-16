@@ -12,13 +12,13 @@ class RulesManager:
         self._load_rules()
 
     def _load_rules(self):
-        # print(os.getcwd())
-        # print(self.rules_file)
         """Загружает правила из JSON-файла"""
         try:
             with open(self.rules_file, 'r', encoding='utf-8') as f:
                 self.rules_data = json.load(f)
+                print(self.rules_data)
             logger.info(f"Успешно загружено {len(self.rules_data)} правил из {self.rules_file}")
+
         except FileNotFoundError:
             logger.error(f"Файл {self.rules_file} не найден")
             self.rules_data = []
@@ -32,11 +32,4 @@ class RulesManager:
     def get_rules(self):
         """Возвращает загруженные правила"""
         return self.rules_data
-
-    # def find_matching_rule(self, request_data):
-    #     """Находит первое правило, соответствующее данным запроса"""
-    #     for rule in self.rules:
-    #         if rule.matches(request_data):
-    #             return rule
-    #     return None
 

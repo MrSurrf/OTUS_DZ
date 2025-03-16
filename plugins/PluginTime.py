@@ -28,7 +28,6 @@ class PluginOS(IPlugins):
         # Получаем текущее серверное время (или время из запроса)
         current_time = datetime.datetime.now().time()
         print(f"Текущее время сервера: {current_time}")
-        a = "12:00 - 16:00"
 
         start_str, end_str = rule_value.split("-")
         start_time = datetime.datetime.strptime(start_str, "%H:%M").time()

@@ -1,22 +1,26 @@
 [
     {
-        "name": "RULE_1",
-        "params": {"os":"Windows","browser": "Firefox", "time": "12:00 - 16:00"},
-        "redirect": "https://dzen.ru"
+        "name": "test",
+        "redirect": "https://360.yandex.ru",
+        "params": {
+            "os": "Windows",
+            "browser": "Yandex Browser"
+        }
     },
     {
-        "name": "RULE_2",
-        "params": {"os":"Windows", "browser": "Yandex Browser", "time": "12:00-16:00"},
-        "redirect": "https://ru.hexlet.io"
+        "name": "trrr",
+        "redirect": "https://www.google.com",
+        "params": {
+            "os": "Windows",
+            "browser": "Firefox"
+        }
     },
     {
-        "name": "RULE_3",
-        "params": {"os":"mac", "browser": "Edge" },
-        "redirect": "https://dzen.ru"
-    },
-    {
-        "name": "RULE_default",
-        "params": {},
-        "redirect": "https://default.com"
+        "name": "Test",
+        "redirect": "https://Test",
+        "params": {
+            "os": "test",
+            "os_version": "test"
+        }
     }
 ]

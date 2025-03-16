@@ -65,3 +65,25 @@ class PluginManager:
         print(self.plugins_dict[key].run_plugin(rule_value))
         return self.plugins_dict[key].run_plugin(rule_value)
 
+    def get_plugin_names(self):
+        """Возвращает список имен доступных плагинов"""
+        # Если плагины еще не загружены, загружаем их
+        if not self.plugins_dict:
+            self.plugin_element_list()
+
+        # Возвращаем имена плагинов
+        return [plugin.get_name() for plugin in self.plugins_dict.values()]
+
+    def get_plugin_keys_and_names(self):
+        """Возвращает словарь с ключами и именами плагинов"""
+        # Если плагины еще не загружены, загружаем их
+        if not self.plugins_dict:
+            self.plugin_element_list()
+
+        # Создаем словарь {ключ: имя}
+        result = {}
+        for key, plugin in self.plugins_dict.items():
+            result[key] = plugin.get_name()
+
+        return result
+
