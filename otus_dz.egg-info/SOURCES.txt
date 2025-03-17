@@ -1,0 +1,6 @@
+README.md
+setup.py
+otus_dz.egg-info/PKG-INFO
+otus_dz.egg-info/SOURCES.txt
+otus_dz.egg-info/dependency_links.txt
+otus_dz.egg-info/top_level.txt
