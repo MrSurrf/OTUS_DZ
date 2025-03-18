@@ -16,9 +16,7 @@ class RequestMiddleware:
     def __init__(self, app):
         self.app = app
         logger.info("=== MIDDLEWARE INITIALIZED ===")
-        print("=== MIDDLEWARE INITIALIZED ===", file=sys.stderr)
-        
-        
+        print("=== MIDDLEWARE INITIALIZED ===", file=sys.stderr)       
         logger.info(f"Содержимое текущей директории: {os.listdir('.')}")
 
     def __call__(self, environ, start_response):        

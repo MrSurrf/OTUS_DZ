@@ -2,9 +2,7 @@ from dependency_injector import containers, providers
 from src.plugins.plugin_manager import PluginManager
 from src.plugins.RequestManager import RequestManager
 
-class DIContainer(containers.DeclarativeContainer):
-    # Конфигурация, если потребуется
-    config = providers.Configuration()
+class DIContainer(containers.DeclarativeContainer):   
     
     # Создаем провайдер для RequestManager
     request_manager = providers.Singleton(

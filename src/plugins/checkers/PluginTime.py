@@ -1,12 +1,12 @@
-from IPlugins import IPlugins
+from src.plugins.IPlugins import IPlugins
 
 
-class PluginOS(IPlugins):
+class PluginTime(IPlugins):
 
     def __init__(self):
         self.needs_data = True
-        self.name = "Версия операционной системы"
-        self.keys = 'os_version'
+        self.name = "Время"
+        self.keys = 'time'
         self.data = {}
 
     def get_name(self):

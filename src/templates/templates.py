@@ -43,6 +43,9 @@ EDITOR_TEMPLATE = """
             margin-right: 5px;
             margin-bottom: 5px;
         }
+        .rule-delete-btn {
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
@@ -95,6 +98,19 @@ EDITOR_TEMPLATE = """
             </div>
             <div class="card-body">
                 <pre id="rulesContainer">Загрузка правил...</pre>
+                
+                <div class="card mt-3">
+                    <div class="card-header bg-danger text-white">
+                        <h5 class="mb-0">Удаление правила</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input type="text" id="ruleNameToDelete" class="form-control" placeholder="Введите имя правила">
+                            <button class="btn btn-danger" id="deleteRuleBtn">Удалить</button>
+                        </div>
+                    </div>
+                </div>
+                
                 <button onclick="loadRules()" class="btn btn-outline-secondary mt-2">Обновить правила</button>
             </div>
         </div>
@@ -127,6 +143,11 @@ EDITOR_TEMPLATE = """
     </template>
 
     <script>
+        // Загружаем правила при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            loadRules();
+        });
+        
         // Отслеживание добавленных плагинов
         const addedPlugins = new Set();
 
@@ -207,6 +228,36 @@ EDITOR_TEMPLATE = """
                 document.getElementById('rulesContainer').innerText = "Ошибка загрузки правил";
             });
         }
+        
+        // Функция для удаления правила
+        function deleteRule() {
+            const ruleName = document.getElementById('ruleNameToDelete').value.trim();
+            
+            if (!ruleName) {
+                alert('Пожалуйста, введите имя правила для удаления');
+                return;
+            }
+            
+            if (!confirm(`Удалить правило "${ruleName}"?`)) {
+                return;
+            }
+            
+            fetch('/delete_rule', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: ruleName })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                document.getElementById('ruleNameToDelete').value = '';
+                loadRules(); // Перезагружаем правила
+            })
+            .catch(error => {
+                console.error('Ошибка при удалении правила:', error);
+                alert('Произошла ошибка при удалении правила');
+            });
+        }
 
         // Функция для сбора данных формы
         function collectFormData() {
@@ -270,14 +321,14 @@ EDITOR_TEMPLATE = """
 
         // Инициализация при загрузке страницы
         document.addEventListener('DOMContentLoaded', function() {
-            // Загружаем существующие правила
-            loadRules();
-
             // Добавляем обработчик для кнопки добавления условия
             document.getElementById('addConditionBtn').addEventListener('click', addConditionRow);
 
             // Добавляем обработчик для кнопки отправки формы
             document.getElementById('submitRuleBtn').addEventListener('click', submitRule);
+            
+            // Добавляем обработчик для кнопки удаления
+            document.getElementById('deleteRuleBtn').addEventListener('click', deleteRule);
         });
     </script>
 </body>

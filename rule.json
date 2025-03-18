@@ -8,19 +8,12 @@
         }
     },
     {
-        "name": "trrr",
+        "name": "TEST",
         "redirect": "https://www.google.com",
         "params": {
             "os": "Windows",
             "browser": "Firefox"
         }
-    },
-    {
-        "name": "Test",
-        "redirect": "https://Test",
-        "params": {
-            "os": "test",
-            "os_version": "test"
-        }
     }
+   
 ]

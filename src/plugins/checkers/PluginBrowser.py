@@ -1,4 +1,4 @@
-from IPlugins import IPlugins
+from src.plugins.IPlugins import IPlugins
 
 
 class PluginBrowser(IPlugins):

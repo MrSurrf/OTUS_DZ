@@ -62,34 +62,34 @@ def init_routes(app):
 
         return jsonify({"message": "Правило успешно добавлено!"})
 
-    @app.route('/apply_rule', methods=['POST'])
-    def apply_rule():
-        data = request.json
-        plugin_name = data.get("plugin")
-        param1 = data.get("param1")
-        param2 = data.get("param2")
+    # @app.route('/apply_rule', methods=['POST'])
+    # def apply_rule():
+    #     data = request.json
+    #     plugin_name = data.get("plugin")
+    #     param1 = data.get("param1")
+    #     param2 = data.get("param2")
 
-        if not plugin_name or not param1 or not param2:
-            return jsonify({"message": "Ошибка: все поля должны быть заполнены!"}), 400
+    #     if not plugin_name or not param1 or not param2:
+    #         return jsonify({"message": "Ошибка: все поля должны быть заполнены!"}), 400
 
-        # Загружаем текущие правила
-        if os.path.exists('rule.json'):
-            with open('rule.json', "r", encoding="utf-8") as file:
-                rules = json.load(file)
-        else:
-            rules = {}
+    #     # Загружаем текущие правила
+    #     if os.path.exists('rule.json'):
+    #         with open('rule.json', "r", encoding="utf-8") as file:
+    #             rules = json.load(file)
+    #     else:
+    #         rules = {}
 
-        # Добавляем или обновляем правило
-        if plugin_name not in rules:
-            rules[plugin_name] = {param1: param2}  # Создаем новый блок правил
-        else:
-            rules[plugin_name][param1] = param2  # Добавляем новое условие
+    #     # Добавляем или обновляем правило
+    #     if plugin_name not in rules:
+    #         rules[plugin_name] = {param1: param2}  # Создаем новый блок правил
+    #     else:
+    #         rules[plugin_name][param1] = param2  # Добавляем новое условие
 
-        # Сохраняем изменения в JSON
-        with open('rule.json', "w", encoding="utf-8") as file:
-            json.dump(rules, file, ensure_ascii=False, indent=4)
+    #     # Сохраняем изменения в JSON
+    #     with open('rule.json', "w", encoding="utf-8") as file:
+    #         json.dump(rules, file, ensure_ascii=False, indent=4)
 
-        return jsonify({"message": "Правило успешно обновлено!"})
+    #     return jsonify({"message": "Правило успешно обновлено!"})
 
     @app.route('/get_rules', methods=['GET'])
     def get_rules():
@@ -99,4 +99,42 @@ def init_routes(app):
         else:
             rules = {}
 
-        return jsonify(rules) 
+        return jsonify(rules)
+
+    @app.route('/delete_rule', methods=['POST'])
+    def delete_rule():
+        data = request.json
+        rule_name = data.get("name")
+
+        if not rule_name:
+            return jsonify({"message": "Ошибка: название правила обязательно!"}), 400
+
+        # Загружаем текущие правила
+        if os.path.exists('rule.json'):
+            with open('rule.json', "r", encoding="utf-8") as file:
+                try:
+                    rules = json.load(file)
+                    if not isinstance(rules, list):
+                        return jsonify({"message": "Ошибка: некорректный формат правил!"}), 500
+                except json.JSONDecodeError:
+                    return jsonify({"message": "Ошибка: некорректный JSON!"}), 500
+        else:
+            return jsonify({"message": "Ошибка: файл правил не найден!"}), 404
+
+        # Ищем и удаляем правило с указанным именем
+        found = False
+        rules_new = []
+        for rule in rules:
+            if rule.get("name") != rule_name:
+                rules_new.append(rule)
+            else:
+                found = True
+
+        if not found:
+            return jsonify({"message": f"Ошибка: правило с именем '{rule_name}' не найдено!"}), 404
+
+        # Сохраняем обновленный список правил
+        with open('rule.json', "w", encoding="utf-8") as file:
+            json.dump(rules_new, file, ensure_ascii=False, indent=4)
+
+        return jsonify({"message": f"Правило '{rule_name}' успешно удалено!"}) 
