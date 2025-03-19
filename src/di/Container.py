@@ -14,9 +14,9 @@ class Container:
         self.rules_list = self.manager.get_rules()
         self.list = []
         self.redirect_url = ''
-        self.is_ready = False        
+        self.is_ready = False       
 
-        #app.container.plugin_manager()
+        
         current_manager = PluginManager(request_data)       
         current_manager.plugin_element_list()
 
