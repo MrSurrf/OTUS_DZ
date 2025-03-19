@@ -1,0 +1,17 @@
+[
+    {
+        "name": "TEST",
+        "redirect": "https://www.google.com",
+        "params": {
+            "os": "Windows",
+            "browser": "Firefox"
+        }
+    },
+    {
+        "name": "1234",
+        "redirect": "https://docs.google.com/document/d/1autwhdvsHXMZBXERoKmVTuoIt7s46L2e-eXAin3R4Ps/edit?tab=t.0",
+        "params": {
+            "browser": "Yandex Browser"
+        }
+    }
+]
